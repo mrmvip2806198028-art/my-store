@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>متجري</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="brand" id="storeName">متجري</div><button id="cartBtn">🛒 السلة <span id="cartCount">0</span></button></header>
+<main>
+<section class="hero"><h1>أهلاً بك في متجري</h1><p>اختر المنتج واضغط شراء.</p></section>
+<section><h2>المنتجات</h2><div id="products" class="grid"></div></section>
+</main>
+<div id="cartModal" class="modal hidden"><div class="box"><button class="close" id="closeCart">✕</button><h2>سلة المشتريات</h2><div id="cartItems"></div><h3>الإجمالي: <span id="total">0</span> جنيه</h3><button class="primary" id="checkoutBtn">إتمام الطلب</button></div></div>
+<div id="checkoutModal" class="modal hidden"><div class="box"><button class="close" id="closeCheckout">✕</button><h2>بيانات الطلب</h2><form id="orderForm">
+<input id="customerName" required placeholder="اسمك">
+<input id="customerPhone" required placeholder="رقم الهاتف">
+<textarea id="customerAddress" placeholder="العنوان / ملاحظات"></textarea>
+<div class="pay"><b>رقم الدفع:</b> <span id="paymentNumber"></span></div>
+<p>بعد الدفع، اكتب رقم العملية في الخانة التالية.</p>
+<input id="paymentRef" placeholder="رقم عملية الدفع">
+<button class="primary">إرسال الطلب</button>
+</form></div></div>
+<footer>© <span id="year"></span> <span id="footerName">متجري</span></footer>
+<script src="config.js"></script><script src="script.js"></script>
+</body></html>

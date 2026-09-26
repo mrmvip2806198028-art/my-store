@@ -1,0 +1,9 @@
+let cart=[];const $=id=>document.getElementById(id);
+document.title=CONFIG.storeName;$("storeName").textContent=CONFIG.storeName;$("footerName").textContent=CONFIG.storeName;$("paymentNumber").textContent=CONFIG.paymentNumber;$("year").textContent=new Date().getFullYear();
+function renderProducts(){$("products").innerHTML=CONFIG.products.map(p=>`<div class="card"><img src="${p.image}" alt=""><h3>${p.name}</h3><div class="price">${p.price} ${CONFIG.currency}</div><button class="primary" onclick="add(${p.id})">أضف للسلة</button></div>`).join("")}
+function add(id){const p=CONFIG.products.find(x=>x.id===id),i=cart.find(x=>x.id===id);i?i.qty++:cart.push({...p,qty:1});renderCart()}
+function renderCart(){ $("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);$("cartItems").innerHTML=cart.length?cart.map(x=>`<div class="item"><span>${x.name} × ${x.qty}</span><span>${x.price*x.qty} ${CONFIG.currency}</span></div>`).join(""):"السلة فارغة";$("total").textContent=cart.reduce((s,x)=>s+x.price*x.qty,0)}
+$("cartBtn").onclick=()=>{$("cartModal").classList.remove("hidden");renderCart()};$("closeCart").onclick=()=>$("cartModal").classList.add("hidden");$("closeCheckout").onclick=()=>$("checkoutModal").classList.add("hidden");
+$("checkoutBtn").onclick=()=>{if(!cart.length)return alert("السلة فارغة");$("cartModal").classList.add("hidden");$("checkoutModal").classList.remove("hidden")};
+$("orderForm").onsubmit=e=>{e.preventDefault();const items=cart.map(x=>`${x.name} × ${x.qty}`).join("، ");const total=cart.reduce((s,x)=>s+x.price*x.qty,0);const msg=`طلب جديد%0Aالاسم: ${$("customerName").value}%0Aالهاتف: ${$("customerPhone").value}%0Aالعنوان: ${$("customerAddress").value}%0Aالمنتجات: ${items}%0Aالإجمالي: ${total} ${CONFIG.currency}%0Aرقم العملية: ${$("paymentRef").value}`;window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`,"_blank");};
+renderProducts();renderCart();
